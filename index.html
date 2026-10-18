@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HR System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #eef2f6;
+      --surface: #ffffff;
+      --ink: #14202e;
+      --ink-soft: #5b6b7c;
+      --line: #d9e1e9;
+      --brand: #0f5c63;
+      --brand-dark: #0a4349;
+      --brand-tint: #e0f0f1;
+      --radius: 14px;
+      --font: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 760px;
+      align-self: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 16px 20px;
+      background: var(--brand);
+      color: #fff;
+    }
+    header h1 { font-size: 1.1rem; font-weight: 600; margin: 0; }
+    header p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.8; }
+
+    .content { padding: 24px 20px 28px; }
+    .content > p { margin: 0 0 20px; color: var(--ink-soft); line-height: 1.5; }
+
+    #links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 18px;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .link-card:hover { border-color: var(--brand); background: var(--brand-tint); }
+    .link-card .icon { font-size: 1.6rem; line-height: 1; }
+    .link-card .title { font-weight: 600; font-size: 1.05rem; }
+    .link-card .desc { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.45; flex: 1; }
+
+    .link-card .btn {
+      margin-top: 10px;
+      align-self: flex-start;
+      font-weight: 600;
+      color: #fff;
+      background: var(--brand);
+      padding: 9px 18px;
+      border-radius: 10px;
+    }
+    .link-card:hover .btn { background: var(--brand-dark); }
+
+    a:focus-visible { outline: 3px solid #7ec4c9; outline-offset: 2px; }
+
+    @media (max-width: 520px) {
+      body { padding: 0; }
+      .app { border: 0; border-radius: 0; min-height: 100vh; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <header>
+      <h1>HR System</h1>
+      <p>Everything you need from HR in one place.</p>
+    </header>
+
+    <div class="content">
+      <p>Choose what you'd like to do:</p>
+      <nav id="links" aria-label="HR System links"></nav>
+    </div>
+  </main>
+
+  <script>
+    /* =====================================================
+       ADD NEW LINKS HERE
+       Copy one block, change the values, save. Nothing else
+       needs to change.
+       ===================================================== */
+    const LINKS = [
+      {
+        icon: "📝",
+        title: "Leave Request",
+        description: "Submit a leave request for HR approval.",
+        button: "Open form",
+        // Paste your n8n form PRODUCTION URL here
+        url: "https://docs.google.com/forms/d/e/1FAIpQLSeSYar4tVdaBxWWEOnlHuDNVU5sK2VDNDpxEK-QUoBitVYzJg/viewform"
+      },
+      {
+        icon: "💬",
+        title: "HR Chatbot",
+        description: "Ask questions about policies, leave and benefits.",
+        button: "Open chatbot",
+        url: "https://kevons18.github.io/HR_employment_portal/"
+      }
+      // Example of a future link:
+      // { icon: "📄", title: "Payslips", description: "View your payslips.", button: "Open", url: "https://..." },
+    ];
+
+    const container = document.getElementById("links");
+
+    LINKS.forEach((item) => {
+      const a = document.createElement("a");
+      a.className = "link-card";
+      a.href = item.url;
+
+      const icon = document.createElement("span");
+      icon.className = "icon";
+      icon.textContent = item.icon || "🔗";
+
+      const title = document.createElement("span");
+      title.className = "title";
+      title.textContent = item.title;
+
+      const desc = document.createElement("span");
+      desc.className = "desc";
+      desc.textContent = item.description || "";
+
+      const btn = document.createElement("span");
+      btn.className = "btn";
+      btn.textContent = item.button || "Open";
+
+      a.append(icon, title, desc, btn);
+      container.appendChild(a);
+    });
+  </script>
+</body>
+</html>
